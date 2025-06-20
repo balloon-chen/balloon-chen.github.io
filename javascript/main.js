@@ -9,8 +9,7 @@ function article_view(id, title) {
 	});
 
 	// title 跟著事件一起送，預期會成為區域變數
-	dataLayer.push({
-		event: "article_view",
+	dataLayer.push('event', 'article_view', {
 		title: title
 	});
 }
@@ -19,8 +18,7 @@ function article_read(percentage) {
 	console.log("percentage: " + percentage);
 
 	// percentage 跟著事件一起送，預期會成為區域變數
-	dataLayer.push({
-		event: "article_read",
+	dataLayer.push('event', 'article_read', {
 		percentage: percentage
 	});
 }
