@@ -8,7 +8,7 @@ function article_view(id, title) {
 	console.log("id: " + id + "\n" + "title: " + title);
 
 	// id 獨立送，預期會成為全域變數
-	gtag({
+	gtag('set', {
 		id: id
 	});
 
