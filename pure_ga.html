@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!-- Google Tag Manager -->
-	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','GTM-PZJH93S6');</script>
-	<!-- End Google Tag Manager -->
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-21E2TF2BFB"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'G-21E2TF2BFB');
+	</script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Article 01</title>
+	<title>Pure GA Article</title>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
 </head>
 <body>
@@ -26,9 +28,9 @@
 			<td><a href="pure_ga.html">article pure</a></td>
 		</tr>
 	</table>
-	<p>article_01</p>
-	<button onclick="article_view(1, 'article_01')">Sent Event article_view</button>
-	<button onclick="article_read('25%')">Sent Event article_read.percentage=25%</button>
-    <script src="javascript/main.js"></script>
+	<p>article_pure</p>
+	<button onclick="article_view(0, 'article_pure')">Sent Event article_view</button>
+	<button onclick="article_read('75%')">Sent Event article_read.percentage=75%</button>
+    <script src="javascript/pure_ga.js"></script>
 </body>
 </html>
