@@ -4,6 +4,7 @@ function mapping_test_event(id, params) {
 	if (id === 1) {
 		dataLayer.push({
 			event: 'mapping_test_event'+id,
+			id: id,
 			title: params
 		})
 	} else {
