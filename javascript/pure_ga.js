@@ -23,6 +23,7 @@ function article_read(percentage) {
 
 	gtag('get', 'G-21E2TF2BFB', 'id', (id) => {
 		gtag('event', 'article_read', {
+			id, id,
 			percentage: percentage
 		});
 	})
