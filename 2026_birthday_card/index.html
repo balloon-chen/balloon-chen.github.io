@@ -881,6 +881,15 @@
       hookSoundtrackEvents();
       hookCandleEvents();
       
+      let lastTouchEnd = 0;
+      document.body.addEventListener('touchend', (event) => {
+        const now = new Date().getTime();
+        if (now - lastTouchEnd <= 300) {
+          event.preventDefault(); // 沒收 0.3 秒內的第二次點擊，徹底封鎖放大！
+        }
+        lastTouchEnd = now;
+      }, { passive: false }); // 注意：這裡必須是 false，否則 preventDefault 會失效
+      
       setTimeout(() => {
         cacheStringBounds();
       }, 150);
