@@ -726,9 +726,16 @@
 
     // --- Typewriter Logic ---
     let currentLineIdx = 0;
+    let typedParagraphs = []; // Store fully completed paragraph strings
     
     function startTypewriterDisplay() {
+      // Ensure container has pre-line and correct styling properties for peak performance
+      typewriterContainer.style.whiteSpace = 'pre-line';
+      typewriterContainer.style.lineHeight = '2';
+      
       if (currentLineIdx >= BLESSING_PARAGRAPHS.length) {
+        // Clear all cursors and render final text block cleanly
+        typewriterContainer.textContent = typedParagraphs.join('\n\n');
         concludeTypewriter();
         return;
       }
@@ -738,47 +745,30 @@
 
       setTimeout(() => {
         let charIdx = 0;
-        let buf = '';
         
-        // Inline Typist Cursor holder helper
-        const activeContainer = document.createElement('div');
-        activeContainer.className = 'inline-flex items-center justify-center w-full';
-        
-        const textLabel = document.createElement('p');
-        textLabel.className = 'text-caramel-gold font-serif italic text-base inline';
-        
-        const cursorDot = document.createElement('span');
-        cursorDot.className = 'w-1.5 h-4 bg-caramel-gold ml-1.5 rounded-full animate-ping whitespace-nowrap inline-block';
-        
-        activeContainer.appendChild(textLabel);
-        activeContainer.appendChild(cursorDot);
-        typewriterContainer.appendChild(activeContainer);
-
         const typingTimer = setInterval(() => {
-          if (charIdx < targetString.length) {
-            buf += targetString.charAt(charIdx);
-            textLabel.textContent = buf;
+          if (charIdx <= targetString.length) {
+            const currentPart = targetString.slice(0, charIdx);
+            const completedPart = typedParagraphs.join('\n\n');
+            const spacer = completedPart ? '\n\n' : '';
+            const cursor = charIdx < targetString.length ? '▎' : '';
+            
+            typewriterContainer.textContent = completedPart + spacer + currentPart + cursor;
+            
             charIdx++;
-            playTypewriterClick();
+            if (charIdx <= targetString.length) {
+              playTypewriterClick();
+            }
           } else {
             clearInterval(typingTimer);
             
-            // Solidify and clean typed line representation
-            activeContainer.remove();
-            
-            const staticBlock = document.createElement('p');
-            staticBlock.className = 'hover:text-caramel-gold transition-colors duration-300 transform translate-y-2 opacity-0 transition-all duration-700';
-            staticBlock.textContent = targetString;
-            typewriterContainer.appendChild(staticBlock);
-            
-            // Cascade beautiful subtle slide-up entrance
-            setTimeout(() => {
-              staticBlock.classList.remove('translate-y-2', 'opacity-0');
-            }, 50);
+            // Push finalized line to completed array
+            typedParagraphs.push(targetString);
+            typewriterContainer.textContent = typedParagraphs.join('\n\n');
 
             currentLineIdx++;
             
-            // Briefly pause reading and proceed to next paragraph
+            // Proceed to next line after brief relaxation pause
             setTimeout(() => {
               startTypewriterDisplay();
             }, 450);

@@ -27,7 +27,7 @@ export default function SecretBase({ audioCtxRef, bgAudioRef }: SecretBaseProps)
   
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Accelerated Typewriter effect controller
+  // Accelerated Typewriter effect controller with pre-line layout
   useEffect(() => {
     if (currentLineIdx >= BLESSING_PARAGRAPHS.length) {
       setTypingComplete(true);
@@ -40,21 +40,25 @@ export default function SecretBase({ audioCtxRef, bgAudioRef }: SecretBaseProps)
     // Scale down original custom delay times dramatically for faster experience
     const initialDelay = currentLineObj.delayBefore ? currentLineObj.delayBefore / 3.5 : 250;
 
-    let textBuffer = '';
     let charIdx = 0;
     let timer: any;
 
     const startTyping = () => {
       timer = setInterval(() => {
-        if (charIdx < targetText.length) {
-          textBuffer += targetText.charAt(charIdx);
-          setDisplayedText(textBuffer);
+        if (charIdx <= targetText.length) {
+          const currentPart = targetText.slice(0, charIdx);
+          const completedPart = visibleLines.join('\n\n');
+          const spacer = completedPart ? '\n\n' : '';
+          const cursor = charIdx < targetText.length ? '▎' : '';
+          
+          setDisplayedText(completedPart + spacer + currentPart + cursor);
           charIdx++;
         } else {
           clearInterval(timer);
           // Set line output as completed
-          setVisibleLines(prev => [...prev, targetText]);
-          setDisplayedText('');
+          const updatedLines = [...visibleLines, targetText];
+          setVisibleLines(updatedLines);
+          setDisplayedText(updatedLines.join('\n\n'));
           
           // Advance to next line with brief reading pause (compressed from 1400ms to 450ms)
           setTimeout(() => {
@@ -73,7 +77,7 @@ export default function SecretBase({ audioCtxRef, bgAudioRef }: SecretBaseProps)
       clearTimeout(delayTimer);
       clearInterval(timer);
     };
-  }, [currentLineIdx]);
+  }, [currentLineIdx, visibleLines]);
 
   // HTML5 Background Audio Player initialization & management
   useEffect(() => {
@@ -195,32 +199,14 @@ export default function SecretBase({ audioCtxRef, bgAudioRef }: SecretBaseProps)
         transition={{ duration: 1.4, ease: "easeOut" }}
         className="w-full bg-[#181818] border border-caramel-gold/15 rounded-3xl overflow-hidden shadow-2xl flex flex-col"
       >
-        {/* Traditional Chinese Typewriter Blessings Section */}
-        <div className="px-8 py-10 flex flex-col space-y-4 min-h-[200px]">
-          <div className="space-y-4 font-serif text-oatmeal/90 text-[15px] leading-extraloose tracking-wide text-center">
-            {visibleLines.map((line, idx) => (
-              <motion.p 
-                key={idx}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="hover:text-caramel-gold transition-colors duration-300"
-              >
-                {line}
-              </motion.p>
-            ))}
-
-            {/* Currently Typing Line */}
-            {displayedText && (
-              <div className="inline-flex items-center justify-center">
-                <p className="text-caramel-gold font-serif italic text-base inline">
-                  {displayedText}
-                </p>
-                {/* Gold blinking typewriter cursor */}
-                <span className="w-1.5 h-4 bg-caramel-gold ml-1 rounded-full animate-ping whitespace-nowrap inline-block" />
-              </div>
-            )}
-          </div>
+        {/* Traditional Chinese Typewriter Blessings Section with zero-thrashing pre-line rendering */}
+        <div className="px-8 py-10 flex flex-col space-y-4 min-h-[220px] justify-center items-center">
+          <p 
+            className="font-serif text-oatmeal/90 text-[15.5px] leading-extraloose tracking-wide text-center"
+            style={{ whiteSpace: 'pre-line' }}
+          >
+            {displayedText || (visibleLines.length > 0 ? visibleLines.join('\n\n') : '')}
+          </p>
         </div>
       </motion.div>
 
