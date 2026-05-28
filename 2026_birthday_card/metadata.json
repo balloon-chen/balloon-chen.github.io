@@ -1,0 +1,6 @@
+{
+  "name": "生日互動賀卡",
+  "description": "一份專屬的高質感生日互動賀卡，由優雅的弦樂開場、溫柔的打字機祝福與溫馨發光的生日蠟燭互動組成。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
