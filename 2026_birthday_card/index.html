@@ -35,11 +35,12 @@
   <style>
     /* Continuous background ambience stars */
     @keyframes pulse-slow {
-      0%, 100% { opacity: 0.15; transform: scale(1); }
-      50% { opacity: 0.35; transform: scale(1.15); }
+      0%, 100% { opacity: 0.15; }
+      50% { opacity: 0.35; }
     }
     .animate-pulse-slow {
       animation: pulse-slow 6s infinite ease-in-out;
+      will-change: opacity;
     }
 
     /* Traditional physical guitar string vibration curve model */
@@ -291,22 +292,40 @@
             
             <!-- Step 1 Writing Wish Structure Form -->
             <form id="wish-form" class="w-full flex flex-col space-y-3 transition-all duration-300">
-              <div class="flex flex-col space-y-1.5 text-center">
+              <div class="flex flex-col space-y-2 text-center">
                 <label class="text-[11px] font-sans text-caramel-gold font-bold uppercase tracking-[0.16em]">
-                  寫下你的生日願望
+                  寫下你的三個生日願望
                 </label>
                 <input
-                  id="wish-input"
+                  id="wish-input-1"
                   type="text"
                   required
                   maxlength="45"
-                  placeholder="許個願吧...（例如：每天都能心想事成！）"
-                  class="w-full px-4 py-3 rounded-xl bg-black/55 border border-caramel-gold/35 text-oatmeal text-base placeholder-oatmeal/25 focus:outline-none focus:border-caramel-gold/80 focus:ring-1 focus:ring-caramel-gold/40 font-serif text-center transition-all duration-300"
+                  placeholder="第一個願望"
+                  class="w-full px-4 py-2.5 rounded-xl bg-black/55 border border-caramel-gold/35 text-oatmeal text-sm placeholder-oatmeal/25 focus:outline-none focus:border-caramel-gold/80 focus:ring-1 focus:ring-caramel-gold/40 font-serif text-center transition-all duration-300"
+                />
+                <input
+                  id="wish-input-2"
+                  type="text"
+                  required
+                  maxlength="45"
+                  placeholder="第二個願望"
+                  class="w-full px-4 py-2.5 rounded-xl bg-black/55 border border-caramel-gold/35 text-oatmeal text-sm placeholder-oatmeal/25 focus:outline-none focus:border-caramel-gold/80 focus:ring-1 focus:ring-caramel-gold/40 font-serif text-center transition-all duration-300"
+                />
+                <input
+                  id="wish-input-3"
+                  type="text"
+                  required
+                  maxlength="45"
+                  placeholder="第三個願望"
+                  class="w-full px-4 py-2.5 rounded-xl bg-black/55 border border-caramel-gold/35 text-oatmeal text-sm placeholder-oatmeal/25 focus:outline-none focus:border-caramel-gold/80 focus:ring-1 focus:ring-caramel-gold/40 font-serif text-center transition-all duration-300"
                 />
               </div>
               <button
+                id="wish-submit-btn"
                 type="submit"
-                class="w-full py-3 rounded-xl bg-gradient-to-r from-[#D4A373] to-[#C8963E] text-[#121212] font-sans text-xs tracking-widest font-extrabold uppercase shadow-lg shadow-caramel-gold/15 hover:shadow-caramel-gold/30 transition-all duration-300 hover:scale-[1.01]"
+                disabled
+                class="w-full py-3 rounded-xl bg-gradient-to-r from-[#D4A373] to-[#C8963E] text-[#121212] font-sans text-xs tracking-widest font-extrabold uppercase shadow-lg shadow-caramel-gold/15 hover:shadow-caramel-gold/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 hover:scale-[1.01]"
               >
                 填好了，為蠟燭注入心願 ✦
               </button>
@@ -314,25 +333,32 @@
 
             <!-- Step 2 Lit Wish Confirmation Badge -->
             <div id="wish-badge-lit" class="w-full flex-col items-center space-y-2 select-none hidden transition-all duration-300">
-              <div class="px-4 py-2.5 bg-caramel-gold/5 border border-caramel-gold/15 rounded-xl w-full text-center shadow-lg">
-                <span class="text-[10px] font-sans tracking-wide text-caramel-gold/50 block mb-1">已點亮願望</span>
-                <p class="text-sm font-serif text-caramel-gold inline-flex items-center justify-center space-x-1">
-                  <!-- Star SVGs -->
-                  <svg class="w-3.5 h-3.5 fill-current text-caramel-gold mr-1" viewBox="0 0 24 24">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                  </svg>
-                  <span id="lit-wish-text">「 願望內容 」</span>
+              <div class="px-4 py-3 bg-caramel-gold/5 border border-caramel-gold/15 rounded-xl w-full text-center shadow-lg flex flex-col space-y-1.5 justify-center">
+                <span class="text-[10px] font-sans tracking-wide text-caramel-gold/50 block mb-1">已點亮三個願望 ✨</span>
+                <p class="text-sm font-serif text-caramel-gold flex items-center justify-center space-x-1">
+                  <span id="lit-wish-text-1">1. 願望內容</span>
+                </p>
+                <p class="text-sm font-serif text-caramel-gold flex items-center justify-center space-x-1">
+                  <span id="lit-wish-text-2">2. 願望內容</span>
+                </p>
+                <p class="text-sm font-serif text-caramel-gold flex items-center justify-center space-x-1">
+                  <span id="lit-wish-text-3">3. 願望內容</span>
                 </p>
               </div>
             </div>
 
             <!-- Step 3 Final Extinguished Wish sealed container -->
-            <div id="wish-badge-final" class="w-full text-center flex flex-col justify-center items-center hidden transition-all duration-300">
-              <div class="inline-flex items-center space-x-2 px-4 py-3 rounded-2xl bg-black/40 border border-caramel-gold/15 text-xs font-serif text-caramel-gold shadow-md">
-                <svg class="w-4 h-4 fill-caramel-gold text-caramel-gold animate-bounce" viewBox="0 0 24 24">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                </svg>
-                <span id="final-wish-text" class="text-sm tracking-wide font-semibold">「 願望內容 」</span>
+            <div id="wish-badge-final" class="w-full text-center flex flex-col justify-center items-center hidden transition-all duration-300 space-y-2">
+              <div class="flex flex-col space-y-2 px-5 py-4 rounded-2xl bg-black/40 border border-caramel-gold/15 text-xs font-serif text-caramel-gold shadow-md w-full justify-center text-center">
+                <div class="flex items-center justify-center space-x-2 text-caramel-gold/80 mb-1">
+                  <svg class="w-4 h-4 fill-caramel-gold text-caramel-gold animate-bounce" viewBox="0 0 24 24">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                  </svg>
+                  <span class="font-sans font-bold text-[10px] uppercase tracking-wider">宇宙已收到你的願望✦</span>
+                </div>
+                <p id="final-wish-text-1" class="text-sm tracking-wide font-semibold text-oatmeal/90"></p>
+                <p id="final-wish-text-2" class="text-sm tracking-wide font-semibold text-oatmeal/90"></p>
+                <p id="final-wish-text-3" class="text-sm tracking-wide font-semibold text-oatmeal/90"></p>
               </div>
             </div>
 
@@ -377,7 +403,9 @@
     const touchedStrings = new Set();
     let hasUnlocked = false;
     let isPlayingMusic = false;
-    let selectedWish = '';
+    let selectedWish1 = '';
+    let selectedWish2 = '';
+    let selectedWish3 = '';
     let candleState = 'writing'; // 'writing' | 'lit' | 'blown'
 
     // DOM Elements cache
@@ -398,11 +426,18 @@
     const candleAnchor = document.getElementById('candle-anchor');
     const candleGlow = document.getElementById('candle-radial-glow');
     const wishForm = document.getElementById('wish-form');
-    const wishInput = document.getElementById('wish-input');
+    const wishInput1 = document.getElementById('wish-input-1');
+    const wishInput2 = document.getElementById('wish-input-2');
+    const wishInput3 = document.getElementById('wish-input-3');
+    const wishSubmitBtn = document.getElementById('wish-submit-btn');
     const wishLitBadge = document.getElementById('wish-badge-lit');
     const wishFinalBadge = document.getElementById('wish-badge-final');
-    const litWishText = document.getElementById('lit-wish-text');
-    const finalWishText = document.getElementById('final-wish-text');
+    const litWishText1 = document.getElementById('lit-wish-text-1');
+    const litWishText2 = document.getElementById('lit-wish-text-2');
+    const litWishText3 = document.getElementById('lit-wish-text-3');
+    const finalWishText1 = document.getElementById('final-wish-text-1');
+    const finalWishText2 = document.getElementById('final-wish-text-2');
+    const finalWishText3 = document.getElementById('final-wish-text-3');
 
     // --- Web Audio Synthesizer Engine ---
     function initAudioContext() {
@@ -430,6 +465,57 @@
     }
 
     // --- Interaction Physics Particles and Sparkles systems ---
+    function triggerRenderLoop() {
+      if (!animationFrame && canvas && ctx) {
+        renderLoop();
+      }
+    }
+
+    function renderLoop() {
+      if (!ctx || !canvas) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (particles.length === 0) {
+        animationFrame = null;
+        return;
+      }
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += p.gravity;
+        if (p.shake) {
+          p.x += (Math.random() - 0.5) * p.shake;
+        }
+        p.alpha -= p.decay;
+
+        if (p.alpha <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+
+        ctx.save();
+        ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = p.color;
+        
+        // Draw crisp core circle
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Draw soft outer bloom halo with zero shadow-rendering rendering overhead
+        ctx.globalAlpha = p.alpha * 0.35;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size * 2.2, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.restore();
+      }
+
+      animationFrame = requestAnimationFrame(renderLoop);
+    }
+
     function initSparklesCanvas() {
       canvas = document.getElementById('sparkles-canvas');
       if (!canvas) return;
@@ -442,39 +528,8 @@
       
       handleResize();
       window.addEventListener('resize', handleResize);
-
-      function renderLoop() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        for (let i = particles.length - 1; i >= 0; i--) {
-          const p = particles[i];
-          p.x += p.vx;
-          p.y += p.vy;
-          p.vy += p.gravity;
-          if (p.shake) {
-            p.x += (Math.random() - 0.5) * p.shake;
-          }
-          p.alpha -= p.decay;
-
-          if (p.alpha <= 0) {
-            particles.splice(i, 1);
-            continue;
-          }
-
-          ctx.save();
-          ctx.globalAlpha = p.alpha;
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          ctx.shadowBlur = 4;
-          ctx.shadowColor = p.color;
-          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.restore();
-        }
-
-        animationFrame = requestAnimationFrame(renderLoop);
-      }
-      renderLoop();
+      
+      triggerRenderLoop();
     }
 
     // Sparks when candle submitting
@@ -493,6 +548,7 @@
           gravity: -0.015
         });
       }
+      triggerRenderLoop();
     }
 
     // Soft wick smoke trail puff
@@ -510,6 +566,7 @@
           gravity: -0.015
         });
       }
+      triggerRenderLoop();
     }
 
     // Golden celebratory fireworks pattern
@@ -532,6 +589,7 @@
           shake: Math.random() * 0.2
         });
       }
+      triggerRenderLoop();
     }
 
     // --- Custom Guitar Multi touch sweeping tracker ---
@@ -583,7 +641,21 @@
       }
     }
 
-    // Interactive Sweeping coordinates tracker
+    let cachedStringRects = [];
+
+    function cacheStringBounds() {
+      const items = document.querySelectorAll('[data-string-id]');
+      cachedStringRects = Array.from(items).map(el => {
+        const rect = el.getBoundingClientRect();
+        return {
+          id: parseInt(el.getAttribute('data-string-id'), 10),
+          left: rect.left,
+          right: rect.right
+        };
+      });
+    }
+
+    // Interactive Sweeping coordinates tracker with zero-thrashing performance cache
     function trackSweepMovement(clientX, clientY) {
       // 1. Direct hit-test
       const hoverEl = document.elementFromPoint(clientX, clientY);
@@ -596,16 +668,16 @@
         }
       }
 
-      // 2. High-speed Fallback: Check coordinates against the physical string wrappers' horizontal boundaries
-      const items = document.querySelectorAll('[data-string-id]');
-      items.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        // Check if the Touch X is within the horizontal hitbox of this string with comfortable 12px margin
-        if (clientX >= rect.left - 12 && clientX <= rect.right + 12) {
-          const sId = parseInt(el.getAttribute('data-string-id'), 10);
-          pluckString(sId);
+      // 2. High-speed Fallback using pre-cached boundaries (zero layout thrashing/reflow cost!)
+      if (cachedStringRects.length === 0) {
+        cacheStringBounds();
+      }
+      for (let i = 0; i < cachedStringRects.length; i++) {
+        const item = cachedStringRects[i];
+        if (clientX >= item.left - 12 && clientX <= item.right + 12) {
+          pluckString(item.id);
         }
-      });
+      }
     }
 
     function hookGuitarGestures() {
@@ -622,6 +694,7 @@
       const box = document.getElementById('guitar-box');
       box.addEventListener('touchstart', (e) => {
         initAudioContext();
+        cacheStringBounds(); // Populate cached coordinates when touch cycle begins (just one fast call)
         const touch = e.touches[0];
         trackSweepMovement(touch.clientX, touch.clientY);
       }, { passive: true });
@@ -805,13 +878,33 @@
 
     // --- Candle interaction and wish mechanics form ---
     function hookCandleEvents() {
+      // Real-time button active state validation
+      function checkInputsFull() {
+        const val1 = wishInput1.value.trim();
+        const val2 = wishInput2.value.trim();
+        const val3 = wishInput3.value.trim();
+        if (val1 && val2 && val3) {
+          wishSubmitBtn.disabled = false;
+        } else {
+          wishSubmitBtn.disabled = true;
+        }
+      }
+
+      wishInput1.addEventListener('input', checkInputsFull);
+      wishInput2.addEventListener('input', checkInputsFull);
+      wishInput3.addEventListener('input', checkInputsFull);
+
       // Step 1: Handle form submittal
       wishForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const userInput = wishInput.value.trim();
-        if (!userInput) return;
+        const u1 = wishInput1.value.trim();
+        const u2 = wishInput2.value.trim();
+        const u3 = wishInput3.value.trim();
+        if (!u1 || !u2 || !u3) return;
 
-        selectedWish = userInput;
+        selectedWish1 = u1;
+        selectedWish2 = u2;
+        selectedWish3 = u3;
         candleState = 'lit';
 
         // Animate state change
@@ -819,7 +912,9 @@
         wishForm.classList.add('hidden');
         
         // Show Lit wish badge
-        litWishText.textContent = `「 ${selectedWish} 」`;
+        litWishText1.textContent = `1. ${selectedWish1}`;
+        litWishText2.textContent = `2. ${selectedWish2}`;
+        litWishText3.textContent = `3. ${selectedWish3}`;
         wishLitBadge.classList.remove('hidden');
         
         // Light the physical candle flame (interactive trigger point)
@@ -830,7 +925,7 @@
 
         // Post back-end sheet logging with robust CORS and JSON serialization.
         // Google Sheets Apps Script web apps support standard CORS, and expecting a JSON payload
-        // of format: JSON.stringify({ wish: userInput })
+        // of format: JSON.stringify({ wish: selectedWish1, wish2: selectedWish2, wish3: selectedWish3 })
         const appsScriptUrl = "https://script.google.com/macros/s/AKfycbzWU9F_DDpeO9XNQEJkONSXY1NanfbaHmXS21BtbSB_b77ekSJ7BMDIroU_-rvo7Dfg/exec";
 
         fetch(appsScriptUrl, {
@@ -839,7 +934,18 @@
           headers: {
             "Content-Type": "text/plain;charset=utf-8"
           },
-          body: JSON.stringify({ wish: userInput })
+          body: JSON.stringify({ 
+            wish: selectedWish1, 
+            wish1: selectedWish1,
+            wish2: selectedWish2,
+            wish3: selectedWish3,
+            colA: selectedWish1,
+            colB: selectedWish2,
+            colC: selectedWish3,
+            a: selectedWish1,
+            b: selectedWish2,
+            c: selectedWish3
+          })
         })
         .then(response => {
           if (!response.ok) {
@@ -869,11 +975,13 @@
         candleGlow.classList.add('opacity-0');
 
         // Animate prompt sealed state
-        candlePrompt.textContent = "祝你願望成真！";
+        candlePrompt.textContent = "祝你願望成真 ☺️";
         wishLitBadge.classList.add('hidden');
         
         // Show sealed final wish card
-        finalWishText.textContent = `「 ${selectedWish} 」`;
+        finalWishText1.textContent = `1. ${selectedWish1}`;
+        finalWishText2.textContent = `2. ${selectedWish2}`;
+        finalWishText3.textContent = `3. ${selectedWish3}`;
         wishFinalBadge.classList.remove('hidden');
 
         // Visual cloud of smoke
@@ -896,6 +1004,13 @@
       hookGuitarGestures();
       hookSoundtrackEvents();
       hookCandleEvents();
+      
+      // Warm up coordinates lookup
+      setTimeout(() => {
+        cacheStringBounds();
+      }, 150);
+      
+      window.addEventListener('resize', cacheStringBounds, { passive: true });
     });
 
   </script>

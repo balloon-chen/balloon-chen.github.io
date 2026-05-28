@@ -57,6 +57,21 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Ensure inputs maintain their dark theme background under all circumstances including browser autofill & focus */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.55) inset !important;
+  -webkit-text-fill-color: #E0E0E0 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input {
+  background-color: rgba(0, 0, 0, 0.55) !important;
+  color: #E0E0E0 !important;
+}
+
 ::selection {
   background-color: rgba(212, 163, 115, 0.3);
   color: #FFFFFF;

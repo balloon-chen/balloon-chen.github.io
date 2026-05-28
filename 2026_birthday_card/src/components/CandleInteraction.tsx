@@ -28,8 +28,12 @@ interface Particle {
 export default function CandleInteraction({ audioCtxRef }: CandleInteractionProps) {
   // States: 'writing' -> inputting wish, 'lit' -> wish injected, candle burning, 'blown' -> extinguished and sealed
   const [candleState, setCandleState] = useState<'writing' | 'lit' | 'blown'>('writing');
-  const [wishInput, setWishInput] = useState<string>('');
-  const [confirmedWish, setConfirmedWish] = useState<string>('');
+  const [wishInput1, setWishInput1] = useState<string>('');
+  const [wishInput2, setWishInput2] = useState<string>('');
+  const [wishInput3, setWishInput3] = useState<string>('');
+  const [confirmedWish1, setConfirmedWish1] = useState<string>('');
+  const [confirmedWish2, setConfirmedWish2] = useState<string>('');
+  const [confirmedWish3, setConfirmedWish3] = useState<string>('');
   
   // Google Sheets sync state
   const [syncStatus, setSyncStatus] = useState<'idle' | 'syncing' | 'success' | 'failed'>('idle');
@@ -189,12 +193,16 @@ export default function CandleInteraction({ audioCtxRef }: CandleInteractionProp
   // Handle wish submit
   const handleWishSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!wishInput.trim()) return;
+    const w1 = wishInput1.trim();
+    const w2 = wishInput2.trim();
+    const w3 = wishInput3.trim();
+    if (!w1 || !w2 || !w3) return;
 
     initAudio();
 
-    const targetWish = wishInput.trim();
-    setConfirmedWish(targetWish);
+    setConfirmedWish1(w1);
+    setConfirmedWish2(w2);
+    setConfirmedWish3(w3);
     setCandleState('lit');
 
     // Launch beautiful particles floating from base of canvas
@@ -205,9 +213,9 @@ export default function CandleInteraction({ audioCtxRef }: CandleInteractionProp
 
     // Trigger Google Sheets submittal
     setSyncStatus('syncing');
-    setSyncMessage('正在上傳願望至 Google 試算表 A 欄...');
+    setSyncMessage('正在上傳願望至 Google 試算表 A, B, C 欄...');
     try {
-      const result = await submitWishToGoogleSheet(targetWish);
+      const result = await submitWishToGoogleSheet(w1, w2, w3);
       if (result.success) {
         setSyncStatus('success');
         setSyncMessage(result.message);
@@ -277,7 +285,7 @@ export default function CandleInteraction({ audioCtxRef }: CandleInteractionProp
           >
             {candleState === 'writing' && "許下你的心願"}
             {candleState === 'lit' && "點擊火苗吹熄蠟燭"}
-            {candleState === 'blown' && "祝你願望成真！"}
+            {candleState === 'blown' && "祝你願望成真 ☺️"}
           </motion.div>
         </AnimatePresence>
       </div>
@@ -373,59 +381,86 @@ export default function CandleInteraction({ audioCtxRef }: CandleInteractionProp
             onSubmit={handleWishSubmit}
             className="w-full flex flex-col space-y-3"
           >
-            <div className="flex flex-col space-y-1.5">
-              <label className="text-[11px] font-sans text-caramel-gold font-bold uppercase tracking-[0.16em] text-center">
-                寫下你的生日願望
+            <div className="flex flex-col space-y-2 text-center">
+              <label className="text-[11px] font-sans text-caramel-gold font-bold uppercase tracking-[0.16em]">
+                寫下你的三個生日願望
               </label>
               <input
                 type="text"
                 required
-                value={wishInput}
-                onChange={(e) => setWishInput(e.target.value)}
+                value={wishInput1}
+                onChange={(e) => setWishInput1(e.target.value)}
                 maxLength={45}
-                placeholder="許個願吧...（例如：每天都能心想事成！）"
-                className="w-full px-4 py-3 rounded-xl bg-black/55 border border-caramel-gold/35 text-oatmeal text-sm placeholder-oatmeal/25 focus:outline-none focus:border-caramel-gold/80 focus:ring-1 focus:ring-caramel-gold/40 font-serif text-center transition-all duration-300"
+                placeholder="第一個願望"
+                className="w-full px-4 py-2 bg-black/55 border border-caramel-gold/35 text-oatmeal text-sm placeholder-oatmeal/25 focus:outline-none focus:border-caramel-gold/80 focus:ring-1 focus:ring-caramel-gold/40 font-serif text-center transition-all duration-300 rounded-xl"
+              />
+              <input
+                type="text"
+                required
+                value={wishInput2}
+                onChange={(e) => setWishInput2(e.target.value)}
+                maxLength={45}
+                placeholder="第二個願望"
+                className="w-full px-4 py-2 bg-black/55 border border-caramel-gold/35 text-oatmeal text-sm placeholder-oatmeal/25 focus:outline-none focus:border-caramel-gold/80 focus:ring-1 focus:ring-caramel-gold/40 font-serif text-center transition-all duration-300 rounded-xl"
+              />
+              <input
+                type="text"
+                required
+                value={wishInput3}
+                onChange={(e) => setWishInput3(e.target.value)}
+                maxLength={45}
+                placeholder="第三個願望"
+                className="w-full px-4 py-2 bg-black/55 border border-caramel-gold/35 text-oatmeal text-sm placeholder-oatmeal/25 focus:outline-none focus:border-caramel-gold/80 focus:ring-1 focus:ring-caramel-gold/40 font-serif text-center transition-all duration-300 rounded-xl"
               />
             </div>
             <button
               type="submit"
-              disabled={!wishInput.trim()}
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-[#D4A373] to-[#C8963E] text-[#121212] font-sans text-xs tracking-widest font-extrabold uppercase shadow-lg shadow-caramel-gold/15 hover:shadow-caramel-gold/30 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-[1.01]"
+              disabled={!wishInput1.trim() || !wishInput2.trim() || !wishInput3.trim()}
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-[#D4A373] to-[#C8963E] text-[#121212] font-sans text-xs tracking-widest font-extrabold uppercase shadow-lg shadow-caramel-gold/15 hover:shadow-caramel-gold/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-[1.01]"
             >
               填好了，為蠟燭注入心願 ✦
             </button>
           </motion.form>
         )}
 
-        {/* Step 2: Wish is injected, candle lit, waiting to be snuffed */}
+        {/* Step 2: Wishes are injected, candle lit, waiting to be snuffed */}
         {candleState === 'lit' && (
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="w-full flex flex-col items-center space-y-3.5 select-none"
+            className="w-full flex flex-col items-center select-none"
           >
-            {/* Visual display of current wish */}
-            <div className="px-4 py-2.5 bg-caramel-gold/5 border border-caramel-gold/20 rounded-xl w-full max-w-xs text-center shadow-lg">
-              <span className="text-[10px] font-sans tracking-wide text-caramel-gold/50 block mb-1">已點亮願望</span>
-              <p className="text-sm font-serif text-caramel-gold inline-flex items-center justify-center space-x-1">
-                <Star className="w-3.5 h-3.5 fill-caramel-gold text-caramel-gold mr-1" />
-                <span>「 {confirmedWish} 」</span>
+            {/* Visual display of current wishes */}
+            <div className="px-4 py-3 bg-caramel-gold/5 border border-caramel-gold/20 rounded-xl w-full text-center shadow-lg flex flex-col space-y-1 justify-center">
+              <span className="text-[10px] font-sans tracking-wide text-caramel-gold/50 block mb-1">已點亮三個願望 ✨</span>
+              <p className="text-sm font-serif text-caramel-gold flex items-center justify-center space-x-1">
+                <span>1. {confirmedWish1}</span>
+              </p>
+              <p className="text-sm font-serif text-caramel-gold flex items-center justify-center space-x-1">
+                <span>2. {confirmedWish2}</span>
+              </p>
+              <p className="text-sm font-serif text-caramel-gold flex items-center justify-center space-x-1">
+                <span>3. {confirmedWish3}</span>
               </p>
             </div>
           </motion.div>
         )}
 
-        {/* Step 3: Sealed final wish display (Resetting is disabled) */}
+        {/* Step 3: Sealed final wishes display */}
         {candleState === 'blown' && (
           <motion.div 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="w-full text-center flex flex-col items-center space-y-3"
+            className="w-full text-center flex flex-col items-center space-y-2"
           >
-            {/* Simplified final wish display */}
-            <div className="inline-flex items-center space-x-2 px-4 py-3 rounded-2xl bg-black/40 border border-caramel-gold/30 text-xs font-serif text-caramel-gold shadow-md">
-              <Star className="w-4 h-4 fill-caramel-gold text-caramel-gold animate-bounce" />
-              <span className="text-sm tracking-wide font-semibold">「 {confirmedWish} 」</span>
+            <div className="flex flex-col space-y-1.5 px-5 py-4 rounded-2xl bg-black/40 border border-caramel-gold/30 text-xs font-serif text-caramel-gold shadow-md w-full justify-center text-center">
+              <div className="flex items-center justify-center space-x-2 text-caramel-gold/80 mb-1">
+                <Star className="w-4 h-4 fill-caramel-gold text-caramel-gold animate-bounce" />
+                <span className="font-sans font-bold text-[10px] uppercase tracking-wider">宇宙已收到你的願望✦</span>
+              </div>
+              <p className="text-sm tracking-wide font-semibold text-oatmeal/90">1. {confirmedWish1}</p>
+              <p className="text-sm tracking-wide font-semibold text-oatmeal/90">2. {confirmedWish2}</p>
+              <p className="text-sm tracking-wide font-semibold text-oatmeal/90">3. {confirmedWish3}</p>
             </div>
           </motion.div>
         )}

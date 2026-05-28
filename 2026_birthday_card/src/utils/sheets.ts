@@ -10,10 +10,10 @@ export interface SyncResult {
 }
 
 /**
- * Submits the birthday wish to the target Google Spreadsheet using
+ * Submits the birthday wishes to the target Google Spreadsheet using
  * the deployed Apps Script Web App URL.
  */
-export async function submitWishToGoogleSheet(wish: string): Promise<SyncResult> {
+export async function submitWishToGoogleSheet(wish1: string, wish2: string, wish3: string): Promise<SyncResult> {
   const configuredUrl = (import.meta as any).env.VITE_GOOGLE_SCRIPT_URL;
   // Fallback to the user's deployment URL if environment variable is not configured
   const url = configuredUrl || "https://script.google.com/macros/s/AKfycbzWU9F_DDpeO9XNQEJkONSXY1NanfbaHmXS21BtbSB_b77ekSJ7BMDIroU_-rvo7Dfg/exec";
@@ -34,7 +34,16 @@ export async function submitWishToGoogleSheet(wish: string): Promise<SyncResult>
         'Content-Type': 'text/plain;charset=utf-8',
       },
       body: JSON.stringify({
-        wish: wish,
+        wish: wish1,
+        wish1: wish1,
+        wish2: wish2,
+        wish3: wish3,
+        colA: wish1,
+        colB: wish2,
+        colC: wish3,
+        a: wish1,
+        b: wish2,
+        c: wish3
       }),
     });
 
@@ -46,7 +55,7 @@ export async function submitWishToGoogleSheet(wish: string): Promise<SyncResult>
     if (data && (data.status === 'success' || data.success)) {
       return {
         success: true,
-        message: "願望已成功同步至暫存表單 A 欄！"
+        message: "願望已成功同步至暫存表單 A, B, C 欄！"
       };
     } else {
       return {
