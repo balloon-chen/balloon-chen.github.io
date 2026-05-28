@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>生日互動賀卡</title>
   
-  <!-- Beautiful Premium Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
   
-  <!-- Tailwind CSS via browser compiler -->
   <script src="https://cdn.tailwindcss.com"></script>
   
   <script>
@@ -92,26 +90,21 @@
 </head>
 <body class="bg-[#121212] text-oatmeal min-h-screen flex flex-col items-center justify-start pt-12 md:pt-20 pb-12 overflow-x-hidden selection:bg-caramel-gold/20 selection:text-caramel-gold font-sans antialiased relative">
 
-  <!-- Ambient Blurred Backdrop Lights -->
   <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-    <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-[#d4a373]/10 rounded-full blur-[100px] animate-pulse-slow"></div>
-    <div class="absolute bottom-1/3 right-1/4 w-80 h-80 bg-[#d4a373]/5 rounded-full blur-[120px] animate-pulse-slow" style="animation-delay: 2s;"></div>
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full animate-pulse-slow" style="background: radial-gradient(circle, rgba(212,163,115,0.08) 0%, rgba(212,163,115,0) 70%);"></div>
+    <div class="absolute bottom-1/3 right-1/4 w-[450px] h-[450px] rounded-full animate-pulse-slow" style="background: radial-gradient(circle, rgba(212,163,115,0.06) 0%, rgba(212,163,115,0) 70%); animation-delay: 2s;"></div>
   </div>
 
   <main class="relative z-10 w-full max-w-lg mx-auto px-4 py-8">
 
-    <!-- ==================== SCREEN 1: GUITAR INTRO ==================== -->
     <div id="screen-guitar" class="transition-fade opacity-100 flex flex-col items-center justify-center text-center">
       
-      <!-- Top Chinese Banner Text -->
       <div class="mb-8 text-caramel-gold text-[15px] tracking-[0.16em] font-serif font-semibold cursor-pointer text-center max-w-xs leading-relaxed animate-pulse">
         撥動琴弦，解鎖今日限定的神秘禮物
       </div>
 
-      <!-- Compact Simulated Guitar Frame -->
       <div id="guitar-box" class="relative w-72 h-[340px] mx-auto bg-gradient-to-b from-[#181818] to-[#141414] rounded-3xl border border-caramel-gold/15 shadow-2xl overflow-hidden flex flex-col justify-between p-6 touch-none select-none">
         
-        <!-- Wooden Fingerboard running down -->
         <div class="absolute left-1/2 -translate-x-1/2 top-0 w-16 h-28 bg-[#1f1a16] border-x border-caramel-gold/10 opacity-80 flex flex-col justify-around py-2">
           <div class="h-[2px] bg-[#3a3028] w-full"></div>
           <div class="h-[2px] bg-[#3a3028] w-full"></div>
@@ -119,45 +112,37 @@
           <div class="h-[2px] bg-[#3a3028] w-full"></div>
         </div>
 
-        <!-- Rosette Sound Hole -->
         <div class="absolute left-1/2 -translate-x-1/2 top-36 w-32 h-32 rounded-full bg-black flex items-center justify-center border-4 border-caramel-gold/20 shadow-inner">
           <div class="w-28 h-28 rounded-full border border-dashed border-caramel-gold/30 flex items-center justify-center"></div>
         </div>
 
-        <!-- 6 Strings layered vertically -->
         <div id="strings-layer" class="absolute inset-x-0 top-0 bottom-16 flex justify-around px-12 z-20">
           
-          <!-- String 1 -->
           <div data-string-id="1" class="relative h-full w-12 flex flex-col items-center cursor-pointer group">
             <div class="string-line absolute h-full w-[2px] bg-oatmeal/60 shadow-md transition-all duration-150"></div>
             <div class="bridge-dot absolute bottom-[-16px] w-[6px] h-[6px] rounded-full bg-caramel-gold/40 transition-all duration-300 z-30"></div>
           </div>
           
-          <!-- String 2 -->
           <div data-string-id="2" class="relative h-full w-12 flex flex-col items-center cursor-pointer group">
             <div class="string-line absolute h-full w-[2px] bg-oatmeal/60 shadow-md transition-all duration-150"></div>
             <div class="bridge-dot absolute bottom-[-16px] w-[6px] h-[6px] rounded-full bg-caramel-gold/40 transition-all duration-300 z-30"></div>
           </div>
           
-          <!-- String 3 -->
           <div data-string-id="3" class="relative h-full w-12 flex flex-col items-center cursor-pointer group">
             <div class="string-line absolute h-full w-[2px] bg-oatmeal/60 shadow-md transition-all duration-150"></div>
             <div class="bridge-dot absolute bottom-[-16px] w-[6px] h-[6px] rounded-full bg-caramel-gold/40 transition-all duration-300 z-30"></div>
           </div>
           
-          <!-- String 4 -->
           <div data-string-id="4" class="relative h-full w-12 flex flex-col items-center cursor-pointer group">
             <div class="string-line absolute h-full w-[2px] bg-oatmeal/60 shadow-md transition-all duration-150"></div>
             <div class="bridge-dot absolute bottom-[-16px] w-[6px] h-[6px] rounded-full bg-caramel-gold/40 transition-all duration-300 z-30"></div>
           </div>
           
-          <!-- String 5 -->
           <div data-string-id="5" class="relative h-full w-12 flex flex-col items-center cursor-pointer group">
             <div class="string-line absolute h-full w-[2px] bg-oatmeal/60 shadow-md transition-all duration-150"></div>
             <div class="bridge-dot absolute bottom-[-16px] w-[6px] h-[6px] rounded-full bg-caramel-gold/40 transition-all duration-300 z-30"></div>
           </div>
           
-          <!-- String 6 -->
           <div data-string-id="6" class="relative h-full w-12 flex flex-col items-center cursor-pointer group">
             <div class="string-line absolute h-full w-[2px] bg-oatmeal/60 shadow-md transition-all duration-150"></div>
             <div class="bridge-dot absolute bottom-[-16px] w-[6px] h-[6px] rounded-full bg-caramel-gold/40 transition-all duration-300 z-30"></div>
@@ -165,20 +150,16 @@
 
         </div>
 
-        <!-- Solid Wooden Bridge holds strings at the bottom -->
         <div class="absolute bottom-12 left-1/2 -translate-x-1/2 w-40 h-5 bg-[#251b14] border border-[#3e2e22] rounded-md shadow-md z-10"></div>
       </div>
       
     </div>
 
-    <!-- ==================== SCREEN 2: SECRET BASE &祝福 BOARD ==================== -->
     <div id="screen-secret-base" class="transition-fade opacity-0 scale-95 hidden w-full flex flex-col space-y-8">
       
-      <!-- Embedded Soundtrack Controller -->
       <div class="relative z-10 w-full flex items-center justify-between bg-black/40 border border-caramel-gold/15 rounded-2xl px-4 py-3 shadow-lg">
         <div class="flex items-center space-x-3">
           <div class="w-8 h-8 rounded-full bg-caramel-gold/10 flex items-center justify-center border border-caramel-gold/20">
-            <!-- CD Rotating disk styled SVG -->
             <svg id="music-vinyl-icon" class="w-3.5 h-3.5 text-caramel-gold transition-transform duration-1000" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polygon points="6 3 20 12 6 21 6 3"/>
             </svg>
@@ -191,10 +172,8 @@
         </div>
 
         <div class="flex items-center space-x-3">
-          <!-- Volume slider control -->
           <div class="flex items-center space-x-2 bg-zinc-900/60 px-2.5 py-1.5 rounded-lg border border-oatmeal/5">
             <button id="volume-toggle-btn" class="text-oatmeal/60 hover:text-caramel-gold transition-colors duration-200 focus:outline-none">
-              <!-- Inline Volume Full SVG -->
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
               </svg>
@@ -210,12 +189,10 @@
             />
           </div>
 
-          <!-- Play/Pause Button -->
           <button 
             id="play-pause-btn"
             class="p-1.5 rounded-lg bg-caramel-gold/10 hover:bg-caramel-gold/25 border border-caramel-gold/20 text-caramel-gold transition-colors duration-200 cursor-pointer"
           >
-            <!-- Play SVG standard -->
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polygon points="6 3 20 12 6 21 6 3"/>
             </svg>
@@ -223,57 +200,42 @@
         </div>
       </div>
 
-      <!-- Main Blessings Content frame -->
       <div class="w-full bg-[#181818] border border-caramel-gold/15 rounded-3xl overflow-hidden shadow-2xl flex flex-col">
         <div class="px-8 py-10 flex flex-col space-y-4 min-h-[220px]">
           <div id="typewriter-container" class="space-y-4 font-serif text-oatmeal/90 text-[15px] leading-8 tracking-wide text-center">
-            <!-- Typist lines will be written here dynamically -->
-          </div>
+            </div>
         </div>
       </div>
 
-      <!-- ==================== INTERACTIVE CANDLE ELEMENT ==================== -->
       <div id="candle-interaction-card" class="transition-fade opacity-0 scale-95 hidden w-full">
         <div class="relative w-full min-h-[480px] bg-gradient-to-b from-[#181818]/60 to-[#121212]/30 rounded-3xl border border-caramel-gold/15 pt-10 pb-8 px-6 flex flex-col items-center justify-start overflow-hidden">
           
-          <!-- Confetti canvas for sparks & fire trails -->
           <canvas id="sparkles-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-10"></canvas>
 
-          <!-- Status feedback instruction -->
           <div class="w-full text-center h-8 flex items-center justify-center select-none z-25 mb-4">
             <div id="candle-prompt" class="text-caramel-gold font-serif text-base tracking-[0.15em] font-medium transition-all duration-300">
               許下你的心願
             </div>
           </div>
 
-          <!-- Physical Candle Graphics Section -->
           <div class="relative w-full h-52 flex items-center justify-center z-20">
-            <!-- Radiant warm backdrop glow when lit -->
-            <div id="candle-radial-glow" class="absolute w-44 h-44 bg-gradient-to-radial from-caramel-gold/30 via-caramel-gold/5 to-transparent blur-[35px] rounded-full pointer-events-none opacity-0 transition-opacity duration-700 animate-pulse"></div>
+            <div id="candle-radial-glow" class="absolute w-44 h-44 rounded-full pointer-events-none opacity-0 transition-opacity duration-700 animate-pulse" style="background: radial-gradient(circle, rgba(212,163,115,0.4) 0%, rgba(212,163,115,0) 70%);"></div>
 
             <div id="candle-anchor" class="relative flex flex-col items-center cursor-default group transition-all duration-300">
               
-              <!-- Flickering Candle Flame (Starts Hidden) -->
               <div id="candle-flame" class="absolute -top-12 flex flex-col items-center select-none hidden pointer-events-none">
-                <!-- Flame background aura -->
-                <div class="w-9 h-14 rounded-full bg-gradient-to-t from-caramel-gold/80 via-yellow-400/40 to-transparent blur-sm animate-pulse absolute -top-2.5"></div>
-                <!-- Interactive center body core -->
+                <div class="w-9 h-14 rounded-full animate-pulse absolute -top-2.5" style="background: radial-gradient(circle, rgba(212,163,115,0.8) 0%, rgba(250,204,21,0.4) 40%, rgba(0,0,0,0) 80%);"></div>
                 <div class="flame-animation w-4 h-9 rounded-b-full rounded-t-full bg-gradient-to-t from-[#B07D48] via-caramel-gold to-[#FAE8B2] shadow-[0_0_18px_rgba(212,163,115,0.8)]"></div>
-                <!-- Base fire temperature cue -->
-                <div class="w-3 h-4 rounded-full bg-sky-400/50 blur-[1px] absolute top-6"></div>
+                <div class="w-3 h-4 rounded-full bg-sky-400/50 absolute top-6" style="filter: blur(1px);"></div>
               </div>
 
-              <!-- Candle Wick -->
               <div class="w-[3px] h-3.5 bg-zinc-700 rounded-t-full"></div>
 
-              <!-- Premium Candle Shaft -->
               <div class="relative w-7 h-28 bg-gradient-to-r from-[#cfad8c] via-[#ecd5be] to-[#bfa07f] rounded-t-sm shadow-xl flex flex-col justify-start overflow-hidden">
-                <!-- Wax teardrops -->
                 <div class="absolute top-0 left-1 w-1.5 h-10 bg-white/60 rounded-b-full shadow-inner opacity-80"></div>
                 <div class="absolute top-0 right-1.5 w-1 h-6 bg-white/45 rounded-b-full opacity-60"></div>
                 <div class="absolute top-0 left-2.5 w-1 h-14 bg-white/40 rounded-b-full opacity-50"></div>
                 
-                <!-- Cozy Small Heart sticker -->
                 <div class="absolute bottom-6 inset-x-0 flex justify-center opacity-40 group-hover:opacity-90 transition-opacity duration-300">
                   <svg class="w-3 h-3 text-[#503E2D]" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
@@ -281,16 +243,13 @@
                 </div>
               </div>
 
-              <!-- Candleholder bottom tray -->
               <div class="w-16 h-2.5 bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-900 rounded-full shadow-lg border-b border-zinc-900"></div>
               <div class="w-12 h-1.5 bg-gradient-to-r from-zinc-900 to-zinc-850 rounded-b-full"></div>
             </div>
           </div>
 
-          <!-- Wish text / Submission Forms -->
           <div class="w-full max-w-xs mx-auto z-25 flex flex-col items-center">
             
-            <!-- Step 1 Writing Wish Structure Form -->
             <form id="wish-form" class="w-full flex flex-col space-y-3 transition-all duration-300">
               <div class="flex flex-col space-y-2 text-center">
                 <label class="text-[11px] font-sans text-caramel-gold font-bold uppercase tracking-[0.16em]">
@@ -325,13 +284,12 @@
                 id="wish-submit-btn"
                 type="submit"
                 disabled
-                class="w-full py-3 rounded-xl bg-gradient-to-r from-[#D4A373] to-[#C8963E] text-[#121212] font-sans text-xs tracking-widest font-extrabold uppercase shadow-lg shadow-caramel-gold/15 hover:shadow-caramel-gold/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 hover:scale-[1.01]"
+                class="w-full py-3 rounded-xl bg-gradient-to-r from-[#D4A373] to-[#C8963E] text-[#121212] font-sans text-xs tracking-widest font-extrabold uppercase shadow-lg hover:shadow-caramel-gold/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 hover:scale-[1.01]"
               >
                 填好了，為蠟燭注入心願 ✦
               </button>
             </form>
 
-            <!-- Step 2 Lit Wish Confirmation Badge -->
             <div id="wish-badge-lit" class="w-full flex-col items-center space-y-2 select-none hidden transition-all duration-300">
               <div class="px-4 py-3 bg-caramel-gold/5 border border-caramel-gold/15 rounded-xl w-full text-center shadow-lg flex flex-col space-y-1.5 justify-center">
                 <span class="text-[10px] font-sans tracking-wide text-caramel-gold/50 block mb-1">已點亮三個願望 ✨</span>
@@ -347,7 +305,6 @@
               </div>
             </div>
 
-            <!-- Step 3 Final Extinguished Wish sealed container -->
             <div id="wish-badge-final" class="w-full text-center flex flex-col justify-center items-center hidden transition-all duration-300 space-y-2">
               <div class="flex flex-col space-y-2 px-5 py-4 rounded-2xl bg-black/40 border border-caramel-gold/15 text-xs font-serif text-caramel-gold shadow-md w-full justify-center text-center">
                 <div class="flex items-center justify-center space-x-2 text-caramel-gold/80 mb-1">
@@ -371,10 +328,8 @@
 
   </main>
 
-  <!-- BACKGROUND SOUND AUDIO SOURCE -->
   <audio id="bg-soundtrack" loop src="https://cdn-www.cw.com.tw/voice/202605/voice-6a171be7eccb65.21769132.mp3"></audio>
 
-  <!-- ==================== VANILLA APP CONTROLLER SCRIPTS ==================== -->
   <script>
     // --- State & Constants Configurations ---
     const BLESSING_PARAGRAPHS = [
@@ -407,11 +362,11 @@
     let selectedWish2 = '';
     let selectedWish3 = '';
     let candleState = 'writing'; // 'writing' | 'lit' | 'blown'
+    let isCanvasActive = false; // PERFORMANCE FIX: Track if canvas is actually needed
 
     // DOM Elements cache
     const screenGuitar = document.getElementById('screen-guitar');
     const screenSecretBase = document.getElementById('screen-secret-base');
-    const stringsContainer = document.getElementById('strings-layer');
     const bgAudio = document.getElementById('bg-soundtrack');
     const playPauseBtn = document.getElementById('play-pause-btn');
     const volumeSlider = document.getElementById('volume-slider');
@@ -423,7 +378,6 @@
     // Candle DOMs
     const candlePrompt = document.getElementById('candle-prompt');
     const candleFlame = document.getElementById('candle-flame');
-    const candleAnchor = document.getElementById('candle-anchor');
     const candleGlow = document.getElementById('candle-radial-glow');
     const wishForm = document.getElementById('wish-form');
     const wishInput1 = document.getElementById('wish-input-1');
@@ -449,33 +403,21 @@
       }
     }
 
-    // High comfort realistic acoustic string pluck synthesis (fully silenced to remove sound effects)
-    function playPluckSound(frequency) {
-      // Intentionally silent to remove sound effects
-    }
-
-    // Interactive soft typewriter select audio clicks (disabled to ensure no sound effects)
-    function playTypewriterClick() {
-      // Intentionally kept silent to remove typing sound effects
-    }
-
-    // Sparkles major G' chord sweep (fully silenced to remove sound effects)
-    function playUnlockingArpeggio() {
-      // Intentionally silent to remove sound effects
-    }
-
     // --- Interaction Physics Particles and Sparkles systems ---
     function triggerRenderLoop() {
       if (!animationFrame && canvas && ctx) {
+        isCanvasActive = true;
         renderLoop();
       }
     }
 
     function renderLoop() {
-      if (!ctx || !canvas) return;
+      if (!ctx || !canvas || !isCanvasActive) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       if (particles.length === 0) {
+        // PERFORMANCE FIX: Completely stop the loop if no particles are left
+        isCanvasActive = false;
         animationFrame = null;
         return;
       }
@@ -499,15 +441,8 @@
         ctx.globalAlpha = p.alpha;
         ctx.fillStyle = p.color;
         
-        // Draw crisp core circle
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-        
-        // Draw soft outer bloom halo with zero shadow-rendering rendering overhead
-        ctx.globalAlpha = p.alpha * 0.35;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 2.2, 0, Math.PI * 2);
         ctx.fill();
         
         ctx.restore();
@@ -519,7 +454,7 @@
     function initSparklesCanvas() {
       canvas = document.getElementById('sparkles-canvas');
       if (!canvas) return;
-      ctx = canvas.getContext('2d');
+      ctx = canvas.getContext('2d', { alpha: true }); // optimize for transparent bg
       
       const handleResize = () => {
         canvas.width = canvas.parentElement.clientWidth;
@@ -527,12 +462,15 @@
       };
       
       handleResize();
-      window.addEventListener('resize', handleResize);
       
-      triggerRenderLoop();
+      // PERFORMANCE FIX: Debounce the resize event so it doesn't fire constantly during scrolling
+      let resizeTimeout;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(handleResize, 100);
+      });
     }
 
-    // Sparks when candle submitting
     function createRisingSparkles(x, y) {
       const colors = ['#D4A373', '#F4E3B1', '#FFB74D', '#FFFFFF'];
       for (let i = 0; i < 40; i++) {
@@ -551,7 +489,6 @@
       triggerRenderLoop();
     }
 
-    // Soft wick smoke trail puff
     function createWickSmoke(x, y) {
       for (let i = 0; i < 18; i++) {
         particles.push({
@@ -569,7 +506,6 @@
       triggerRenderLoop();
     }
 
-    // Golden celebratory fireworks pattern
     function spawnFireworkSplendor(x, y, color) {
       const colors = ['#D4A373', '#F4E3B1', '#C8963E', '#FFFFFF', '#FFB74D'];
       const count = 90 + Math.floor(Math.random() * 30);
@@ -600,11 +536,9 @@
       const stringObj = GUITAR_PRESET_TUNINGS.find(s => s.id === stringId);
       if (!stringObj) return;
 
-      // Avoid double trigger during single sweep logic pass
       if (!touchedStrings.has(stringId)) {
         touchedStrings.add(stringId);
 
-        // Visual and haptic simulation models
         const strEl = document.querySelector(`[data-string-id="${stringId}"] .string-line`);
         const dotEl = document.querySelector(`[data-string-id="${stringId}"] .bridge-dot`);
 
@@ -619,19 +553,12 @@
         }
 
         if (dotEl) {
-          dotEl.classList.add('bg-caramel-gold', 'shadow-[0_0_8px_rgba(212,163,115,0.8)]');
+          dotEl.classList.add('bg-caramel-gold');
           dotEl.classList.remove('bg-caramel-gold/40');
         }
 
-        // Play plucked wave
-        playPluckSound(stringObj.frequency);
-
-        // Sequence unlock mechanics check
         if (touchedStrings.size === 6) {
           hasUnlocked = true;
-          playUnlockingArpeggio();
-          
-          // Completed sweep, ready to transition to the greeting cards
           bgAudio.volume = 0;
 
           setTimeout(() => {
@@ -642,7 +569,6 @@
     }
 
     let cachedStringRects = [];
-
     function cacheStringBounds() {
       const items = document.querySelectorAll('[data-string-id]');
       cachedStringRects = Array.from(items).map(el => {
@@ -655,9 +581,7 @@
       });
     }
 
-    // Interactive Sweeping coordinates tracker with zero-thrashing performance cache
     function trackSweepMovement(clientX, clientY) {
-      // 1. Direct hit-test
       const hoverEl = document.elementFromPoint(clientX, clientY);
       if (hoverEl) {
         const strWrap = hoverEl.closest('[data-string-id]');
@@ -668,7 +592,6 @@
         }
       }
 
-      // 2. High-speed Fallback using pre-cached boundaries (zero layout thrashing/reflow cost!)
       if (cachedStringRects.length === 0) {
         cacheStringBounds();
       }
@@ -681,7 +604,6 @@
     }
 
     function hookGuitarGestures() {
-      // Desktop Hover sweeping
       const items = document.querySelectorAll('[data-string-id]');
       items.forEach(el => {
         el.addEventListener('mouseenter', () => {
@@ -690,11 +612,10 @@
         });
       });
 
-      // Mobile Touch sweeping (Strings cumulative selection across multiple touches instead of resetting)
       const box = document.getElementById('guitar-box');
       box.addEventListener('touchstart', (e) => {
         initAudioContext();
-        cacheStringBounds(); // Populate cached coordinates when touch cycle begins (just one fast call)
+        cacheStringBounds();
         const touch = e.touches[0];
         trackSweepMovement(touch.clientX, touch.clientY);
       }, { passive: true });
@@ -709,33 +630,29 @@
 
     // --- Screen transition ---
     function transitionToSecretBase() {
-      // Elegant fading routines
       screenGuitar.classList.add('opacity-0', 'scale-95');
       setTimeout(() => {
         screenGuitar.classList.add('hidden');
         
         screenSecretBase.classList.remove('hidden');
-        // Force reflow
-        screenSecretBase.offsetHeight;
+        screenSecretBase.offsetHeight; // force reflow
         screenSecretBase.classList.remove('opacity-0', 'scale-95');
         
-        // Start showing the typewriter lines block
         startTypewriterDisplay();
       }, 800);
     }
 
     // --- Typewriter Logic ---
     let currentLineIdx = 0;
-    let typedParagraphs = []; // Store fully completed paragraph strings
+    let typedParagraphs = []; 
     
     function startTypewriterDisplay() {
-      // Ensure container has pre-line and correct styling properties for peak performance
+      // PERFORMANCE FIX: use innerText and pre-line CSS for zero overhead
       typewriterContainer.style.whiteSpace = 'pre-line';
       typewriterContainer.style.lineHeight = '2';
       
       if (currentLineIdx >= BLESSING_PARAGRAPHS.length) {
-        // Clear all cursors and render final text block cleanly
-        typewriterContainer.textContent = typedParagraphs.join('\n\n');
+        typewriterContainer.innerText = typedParagraphs.join('\n\n');
         concludeTypewriter();
         return;
       }
@@ -753,33 +670,28 @@
             const spacer = completedPart ? '\n\n' : '';
             const cursor = charIdx < targetString.length ? '▎' : '';
             
-            typewriterContainer.textContent = completedPart + spacer + currentPart + cursor;
+            // PERFORMANCE FIX: Use innerText instead of textContent or innerHTML to avoid repaints
+            typewriterContainer.innerText = completedPart + spacer + currentPart + cursor;
             
             charIdx++;
-            if (charIdx <= targetString.length) {
-              playTypewriterClick();
-            }
           } else {
             clearInterval(typingTimer);
             
-            // Push finalized line to completed array
             typedParagraphs.push(targetString);
-            typewriterContainer.textContent = typedParagraphs.join('\n\n');
+            typewriterContainer.innerText = typedParagraphs.join('\n\n');
 
             currentLineIdx++;
             
-            // Proceed to next line after brief relaxation pause
             setTimeout(() => {
               startTypewriterDisplay();
             }, 450);
           }
-        }, 30); // Compact premium typing speed
+        }, 30); 
 
       }, initialDelay);
     }
 
     function concludeTypewriter() {
-      // Typing fully completed, fade-in bottom candle interaction panel
       candleCard.classList.remove('hidden');
       candleCard.offsetHeight;
       candleCard.classList.remove('opacity-0', 'scale-95');
@@ -808,7 +720,6 @@
         vinylIcon.classList.add('animate-spin');
         vinylIcon.style.animationDuration = '4s';
         
-        // Pause icon representation
         playPauseBtn.innerHTML = `
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/>
@@ -818,7 +729,6 @@
         bgAudio.pause();
         vinylIcon.classList.remove('animate-spin');
         
-        // Play icon representation
         playPauseBtn.innerHTML = `
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="6 3 20 12 6 21 6 3"/>
@@ -828,13 +738,11 @@
     }
 
     function hookSoundtrackEvents() {
-      // Play/Pause togglers
       playPauseBtn.addEventListener('click', () => {
         isPlayingMusic = !isPlayingMusic;
         syncSoundtrackWidgets();
       });
 
-      // Volume sliders
       volumeSlider.addEventListener('input', (e) => {
         const val = parseFloat(e.target.value);
         bgAudio.volume = val;
@@ -842,7 +750,6 @@
         updateVolumeBtnIcon(val);
       });
 
-      // Volume click mute buttons
       volumeToggleBtn.addEventListener('click', () => {
         bgAudio.muted = !bgAudio.muted;
         volumeSlider.value = bgAudio.muted ? 0 : bgAudio.volume;
@@ -868,7 +775,6 @@
 
     // --- Candle interaction and wish mechanics form ---
     function hookCandleEvents() {
-      // Real-time button active state validation
       function checkInputsFull() {
         const val1 = wishInput1.value.trim();
         const val2 = wishInput2.value.trim();
@@ -884,7 +790,6 @@
       wishInput2.addEventListener('input', checkInputsFull);
       wishInput3.addEventListener('input', checkInputsFull);
 
-      // Step 1: Handle form submittal
       wishForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const u1 = wishInput1.value.trim();
@@ -897,25 +802,19 @@
         selectedWish3 = u3;
         candleState = 'lit';
 
-        // Animate state change
         candlePrompt.textContent = "點擊火苗吹熄蠟燭";
         wishForm.classList.add('hidden');
         
-        // Show Lit wish badge
         litWishText1.textContent = `1. ${selectedWish1}`;
         litWishText2.textContent = `2. ${selectedWish2}`;
         litWishText3.textContent = `3. ${selectedWish3}`;
         wishLitBadge.classList.remove('hidden');
         
-        // Light the physical candle flame (interactive trigger point)
         candleFlame.classList.remove('hidden', 'pointer-events-none');
         candleFlame.classList.add('pointer-events-auto', 'cursor-pointer');
         candleGlow.classList.remove('opacity-0');
         candleGlow.classList.add('opacity-40');
 
-        // Post back-end sheet logging with robust CORS and JSON serialization.
-        // Google Sheets Apps Script web apps support standard CORS, and expecting a JSON payload
-        // of format: JSON.stringify({ wish: selectedWish1, wish2: selectedWish2, wish3: selectedWish3 })
         const appsScriptUrl = "https://script.google.com/macros/s/AKfycbzWU9F_DDpeO9XNQEJkONSXY1NanfbaHmXS21BtbSB_b77ekSJ7BMDIroU_-rvo7Dfg/exec";
 
         fetch(appsScriptUrl, {
@@ -936,51 +835,38 @@
             b: selectedWish2,
             c: selectedWish3
           })
-        })
-        .then(response => {
-          if (!response.ok) {
-            console.warn("Google Sheets Sync returned non-OK status:", response.status);
-          }
-        })
-        .catch(err => {
+        }).catch(err => {
           console.warn("Google Sheets Sync fetch error:", err);
         });
 
-        // Launch rising particles float from bottom of card
         if (canvas) {
           createRisingSparkles(canvas.width / 2, canvas.height - 40);
         }
       });
 
-      // Step 2: Handle clicking candle flame trigger specifically to extinguish
       candleFlame.addEventListener('click', (e) => {
         e.stopPropagation();
         if (candleState !== 'lit') return;
         candleState = 'blown';
 
-        // Disappear flame and glowing halo
         candleFlame.classList.add('hidden', 'pointer-events-none');
         candleFlame.classList.remove('pointer-events-auto', 'cursor-pointer');
         candleGlow.classList.remove('opacity-40');
         candleGlow.classList.add('opacity-0');
 
-        // Animate prompt sealed state
         candlePrompt.textContent = "祝你願望成真 ☺️";
         wishLitBadge.classList.add('hidden');
         
-        // Show sealed final wish card
         finalWishText1.textContent = `1. ${selectedWish1}`;
         finalWishText2.textContent = `2. ${selectedWish2}`;
         finalWishText3.textContent = `3. ${selectedWish3}`;
         wishFinalBadge.classList.remove('hidden');
 
-        // Visual cloud of smoke
         if (canvas) {
           const cx = canvas.width / 2;
           const cy = canvas.height / 2 - 25;
           createWickSmoke(cx, cy);
 
-          // Staggered premium fireworks explosions
           setTimeout(() => { spawnFireworkSplendor(cx, cy - 50, '#D4A373'); }, 350);
           setTimeout(() => { spawnFireworkSplendor(cx - 80, cy - 20, '#F4E3B1'); }, 700);
           setTimeout(() => { spawnFireworkSplendor(cx + 80, cy - 30, '#FFB74D'); }, 1050);
@@ -995,7 +881,6 @@
       hookSoundtrackEvents();
       hookCandleEvents();
       
-      // Warm up coordinates lookup
       setTimeout(() => {
         cacheStringBounds();
       }, 150);
