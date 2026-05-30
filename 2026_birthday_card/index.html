@@ -897,8 +897,12 @@
       let isAudioUnlocked = false;
       const unlockAudio = () => {
         if (!isAudioUnlocked) {
+          // 🚨 【關鍵修正】：先把音量強制設為 0，進行真正的「無聲解鎖」
+          bgAudio.volume = 0; 
+          
           bgAudio.play().then(() => {
             bgAudio.pause();
+            bgAudio.currentTime = 0; // 把音樂進度拉回最開頭
             isAudioUnlocked = true;
           }).catch(() => {});
         }
