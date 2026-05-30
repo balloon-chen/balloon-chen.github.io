@@ -333,13 +333,14 @@
   <script>
     // --- State & Constants Configurations ---
     const BLESSING_PARAGRAPHS = [
-      "在宇宙的無數顆星星之中，總有一顆，",
-      "專屬於今晚的溫柔。✨",
-      "撥動了這根琴弦，就像撥通了與你相遇的波長。",
-      "謝謝你來到這個世界，讓平常的日子，也變得閃閃發光。",
-      "在這個特別的日子裡，願你哭過笑過，依然被世界溫柔以待；",
-      "願所有微小而確切的幸福，都在你需要時如期而至。🌌",
-      "「生日快樂。願你所期盼的星光，落滿在你眼裡的銀河。」💐"
+      "生日快樂 🎈",
+      "認識你是我的幸運 ☺️",
+      "這段時間以來，每天都好期待跟你聊天～\n明明在不同城市生活、也還沒有見過面，但是好神奇唷，跟你聊天總是覺得很安心、以及被理解",
+      "我原來一方面期待離職後可以做好多想做的事，另一方面也有點害怕，怕一旦不用上班了，沒有固定行程、沒有需要早起上班，會不會突然狀況不好，整組壞掉",
+      "可是認識你之後，整個人都活起來了！好期待離職（？\n因為我知道，玩得很開心的時候你在；需要拍拍的時候你也在 ☺️",
+      "你平常工作忙碌，不僅手上有好多學生，還不斷在找新的機會，最近也積極練琴，而且身體抱恙。希望我也能成為讓你安心、自在，帶給你活力的人",
+      "很期待七月份可以見到你！",
+      "再次跟你說聲，生日快樂 🎈"
     ];
 
     const GUITAR_PRESET_TUNINGS = [
@@ -559,7 +560,11 @@
 
         if (touchedStrings.size === 6) {
           hasUnlocked = true;
-          bgAudio.volume = 0;
+          
+          // 💡 修正：不重新載入 src，確保音量正常後直接播放！
+          isPlayingMusic = true;
+          bgAudio.volume = parseFloat(volumeSlider.value) || 0.35;
+          bgAudio.play().catch(err => console.log("Autoplay blocked by browser:", err));
 
           setTimeout(() => {
             transitionToSecretBase();
@@ -638,6 +643,8 @@
         screenSecretBase.offsetHeight; // force reflow
         screenSecretBase.classList.remove('opacity-0', 'scale-95');
         
+        // 確保音樂介面同步更新
+        syncSoundtrackWidgets();
         startTypewriterDisplay();
       }, 800);
     }
@@ -649,7 +656,7 @@
     function startTypewriterDisplay() {
       // PERFORMANCE FIX: use innerText and pre-line CSS for zero overhead
       typewriterContainer.style.whiteSpace = 'pre-line';
-      typewriterContainer.style.lineHeight = '1.3';
+      typewriterContainer.style.lineHeight = '1.6';
       
       if (currentLineIdx >= BLESSING_PARAGRAPHS.length) {
         typewriterContainer.innerText = typedParagraphs.join('\n\n');
@@ -707,15 +714,20 @@
         if (!bgAudio.src) {
           bgAudio.src = "https://cdn-www.cw.com.tw/voice/202605/voice-6a171be7eccb65.21769132.mp3";
         }
-        bgAudio.play().catch(() => {
-          isPlayingMusic = false;
-          vinylIcon.classList.remove('animate-spin');
-          playPauseBtn.innerHTML = `
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="6 3 20 12 6 21 6 3"/>
-            </svg>
-          `;
-        });
+        
+        // Handle play promise to avoid uncaught errors
+        const playPromise = bgAudio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            isPlayingMusic = false;
+            vinylIcon.classList.remove('animate-spin');
+            playPauseBtn.innerHTML = `
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="6 3 20 12 6 21 6 3"/>
+              </svg>
+            `;
+          });
+        }
         
         vinylIcon.classList.add('animate-spin');
         vinylIcon.style.animationDuration = '4s';
@@ -881,6 +893,26 @@
       hookSoundtrackEvents();
       hookCandleEvents();
       
+      // 萬用音訊解鎖器（升級版）：涵蓋手機觸碰、滑鼠點擊、鍵盤按壓
+      let isAudioUnlocked = false;
+      const unlockAudio = () => {
+        if (!isAudioUnlocked) {
+          bgAudio.play().then(() => {
+            bgAudio.pause();
+            isAudioUnlocked = true;
+          }).catch(() => {});
+        }
+        // 解鎖後就把監聽器清掉，不佔效能
+        ['touchstart', 'click', 'mousedown', 'keydown'].forEach(evt => {
+          document.body.removeEventListener(evt, unlockAudio);
+        });
+      };
+      
+      // 一進站就佈下天羅地網，只要有任何實際互動就解鎖
+      ['touchstart', 'click', 'mousedown', 'keydown'].forEach(evt => {
+        document.body.addEventListener(evt, unlockAudio, { once: true });
+      });
+
       let lastTouchEnd = 0;
       document.body.addEventListener('touchend', (event) => {
         const now = new Date().getTime();
@@ -888,7 +920,7 @@
           event.preventDefault(); // 沒收 0.3 秒內的第二次點擊，徹底封鎖放大！
         }
         lastTouchEnd = now;
-      }, { passive: false }); // 注意：這裡必須是 false，否則 preventDefault 會失效
+      }, { passive: false }); 
       
       setTimeout(() => {
         cacheStringBounds();
